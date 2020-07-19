@@ -60,11 +60,13 @@ public class PessoaDAO {
         Connection con = ConnectionOracle.getConnection();
         
         PreparedStatement stmt = null;
+     
         ResultSet rs = null;
 
         List<Pessoa> pessoas = new ArrayList<>();
 
         try {
+            
             stmt = con.prepareStatement("SELECT * FROM pessoa");
             
             rs = stmt.executeQuery();
@@ -101,8 +103,8 @@ public class PessoaDAO {
         List<Pessoa> pessoas = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM pessoa WHERE nome LIKE = ?");
-            stmt.setString(1, "%"+name+"%");
+            String sql = "SELECT * FROM pessoa WHERE nome LIKE '%" + name + "%'";
+            stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
